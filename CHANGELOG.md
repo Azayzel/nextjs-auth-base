@@ -246,6 +246,8 @@ existing names without the prefix.
   separate package)
 - `babel-plugin-styled-components` added as an explicit dev dependency (required by `.babelrc`
   in styled-components v6; was previously bundled with the main package)
+- `@testing-library/dom` added as an explicit dev dependency (required by `@testing-library/react`
+  v16 as a peer; was previously bundled transitively)
 
 #### next.config.js
 - Removed `dotenv` call, `@zeit/next-less`, `@zeit/next-source-maps`, `next-compose-plugins`
@@ -324,3 +326,16 @@ release, as they would require wider rewrites:
 - **`type-graphql` 2.0**: The `2.0.0-rc.3` release candidate requires
   `class-validator` 0.14+ and has changed decorator semantics. Review the
   [type-graphql 2.0 changelog](https://typegraphql.com/docs/changelog.html).
+
+### Pre-existing Test Failures (not introduced by this upgrade)
+
+The following test suites were already failing before this upgrade and continue
+to fail because they depend on Ant Design 3.x APIs that were removed in v5+:
+
+- `Form.create()` – removed in antd 4; use the `useForm` hook
+- `Icon` from `antd` – moved to `@ant-design/icons`
+- `@testing-library/react` `wait` helper – renamed to `waitFor` in v10
+
+Fixing these requires updating the Ant Design usage throughout the component
+tree and updating test utilities to the current `@testing-library/react` API.
+All other test suites (6 passing) pass without modification after this upgrade.

@@ -1,13 +1,9 @@
 import React from 'react';
 import NextApp from 'next/app';
 import Router from 'next/router';
-import nextCookie from 'next-cookies';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { PageTransition } from 'next-page-transitions';
+import { ApolloProvider } from '@apollo/client';
 import lf from 'localforage';
-
-import './styles.less';
 
 import { formatRouteQuery } from '@services/format';
 import Head from '@components/Head';
@@ -101,7 +97,8 @@ class MyApp extends NextApp {
   static async getInitialProps({ Component, ctx }) {
     const isServer = ctx.req || ctx.res;
 
-    const { session } = nextCookie(ctx);
+    // Read the session cookie directly from the request
+    const session = ctx.req?.cookies?.session;
 
     // Redirect server/client-side if not authorized
     if (Component.isAuthorized && !Component.isAuthorized(session)) {
@@ -175,7 +172,7 @@ class MyApp extends NextApp {
       err,
     } = this.props;
 
-    // workaround https://github.com/zeit/next.js/blob/canary/examples/with-sentry-simple/pages/_app.js
+    // workaround https://github.com/vercel/next.js/blob/canary/examples/with-sentry/pages/_app.js
     const modifiedPageProps = { ...pageProps, err };
 
     return (
@@ -184,19 +181,7 @@ class MyApp extends NextApp {
           <ApolloProvider client={apollo}>
             <GlobalStyle />
             <Head />
-            <PageTransition
-              timeout={TIMEOUT}
-              classNames="page-transition"
-              loadingClassNames="loading-indicator"
-              loadingComponent={<Loader />}
-              loadingDelay={500}
-              loadingTimeout={{
-                enter: TIMEOUT,
-                exit: 0,
-              }}
-            >
-              <Component {...modifiedPageProps} key={router.route} />
-            </PageTransition>
+            <Component {...modifiedPageProps} key={router.route} />
           </ApolloProvider>
         </SessionContext.Provider>
       </ThemeProvider>
@@ -205,3 +190,4 @@ class MyApp extends NextApp {
 }
 
 export default withApollo(MyApp);
+

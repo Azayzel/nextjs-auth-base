@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { useApolloClient } from '@apollo/react-hooks';
+import { useApolloClient } from '@apollo/client';
 import { Form, Input, Button, Row, Col, message } from 'antd';
 
 import { StorefrontCourse } from '@generated/client';

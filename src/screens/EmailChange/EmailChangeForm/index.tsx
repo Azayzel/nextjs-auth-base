@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 
-import { useApolloClient } from '@apollo/react-hooks';
+import { useApolloClient } from '@apollo/client';
 import { useEmailChangeMutation } from '@generated/client';
 import FormItem from '@components/Form/Item';
 import FormStretchedButton from '@components/Form/StretchedButton';

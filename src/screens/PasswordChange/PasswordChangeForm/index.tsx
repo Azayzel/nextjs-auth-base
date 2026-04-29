@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import { useApolloClient } from '@apollo/react-hooks';
+import { useApolloClient } from '@apollo/client';
 
 import { usePasswordChangeMutation } from '@generated/client';
 import FormItem from '@components/Form/Item';

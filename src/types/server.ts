@@ -1,11 +1,7 @@
-import {
-  ServerResponse as ServerResponseBase,
-  ServerRequest as ServerRequestBase,
-} from 'microrouter';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-export interface ServerRequest extends ServerRequestBase {
+export interface ServerRequest extends NextApiRequest {
   cookies: { [key: string]: string };
-  body: any;
 }
 
-export interface ServerResponse extends ServerResponseBase {}
+export interface ServerResponse extends NextApiResponse {}

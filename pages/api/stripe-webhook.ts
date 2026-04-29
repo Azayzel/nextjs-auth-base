@@ -1,5 +1,7 @@
 // https://stripe.com/docs/payments/checkout/fulfillment#webhooks
 
+import type { NextApiRequest, NextApiResponse } from 'next';
+
 import stripe from '@services/stripe';
 
 // LEGACY
@@ -11,18 +13,28 @@ import { CourseConnector } from '@connectors/course';
 import { PartnerConnector } from '@connectors/partner';
 import { CouponConnector } from '@connectors/coupon';
 
-import { send } from 'micro';
 import getRawBody from 'raw-body';
 
-import type { ServerRequest, ServerResponse } from '@typeDefs/server';
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
-export default async (
-  request: ServerRequest,
-  response: ServerResponse
-) => {
+export default async function stripeWebhookHandler(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
   const rawBody = await getRawBody(request);
 
-  const sig = request.headers['stripe-signature'];
+  const sig = Array.isArray(request.headers['stripe-signature'])
+    ? request.headers['stripe-signature'][0]
+    : request.headers['stripe-signature'];
+
+  if (!sig) {
+    response.status(400).send('Webhook Error: missing stripe-signature header');
+    return;
+  }
 
   let event;
 
@@ -30,10 +42,13 @@ export default async (
     event = stripe.webhooks.constructEvent(
       rawBody,
       sig,
-      process.env.STRIPE_WEBHOOK_SECRET
+      process.env.STRIPE_WEBHOOK_SECRET ?? ''
     );
   } catch (error) {
-    send(response, 400, `Webhook Error: ${error.message}`);
+    response
+      .status(400)
+      .send(`Webhook Error: ${(error as Error).message}`);
+    return;
   }
 
   if (event.type === 'checkout.session.completed') {
@@ -42,22 +57,21 @@ export default async (
     const {
       metadata,
       client_reference_id,
-      // customer_email,
-      display_items,
-    } = session;
+      line_items,
+    } = session as any;
 
-    const { courseId, bundleId, coupon, partnerId } = metadata;
+    const { courseId, bundleId, coupon, partnerId } = metadata ?? {};
 
     const connection = await getConnection();
-    const courseConnector = new CourseConnector(connection!);
-    const partnerConnector = new PartnerConnector(connection!);
-    const couponConnector = new CouponConnector(connection!);
+    const courseConnector = new CourseConnector(connection);
+    const partnerConnector = new PartnerConnector(connection);
+    const couponConnector = new CouponConnector(connection);
 
     const course = await courseConnector.createCourse({
       userId: client_reference_id,
       courseId: courseId,
       bundleId: bundleId,
-      price: display_items[0].amount,
+      price: line_items?.data?.[0]?.amount_total ?? 0,
       currency: 'USD',
       paymentType: 'STRIPE',
       coupon: coupon,
@@ -76,21 +90,15 @@ export default async (
       uid: client_reference_id,
       courseId: courseId,
       bundleId: bundleId,
-      amount: Number((display_items[0].amount / 100).toFixed(2)),
+      amount: Number(
+        ((line_items?.data?.[0]?.amount_total ?? 0) / 100).toFixed(2)
+      ),
       paymentType: 'STRIPE',
       coupon: coupon,
     });
     // LEGACY END
   }
 
-  // TODO
-  // accoring to Stripe documentation a response from express looks like: response.json({ received: true });
-  // I send the response with Micro now and experience that the Stripe server doesn't react to it. Is there anything wrong?
-  send(response, 200, { received: true });
-};
+  response.status(200).json({ received: true });
+}
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};

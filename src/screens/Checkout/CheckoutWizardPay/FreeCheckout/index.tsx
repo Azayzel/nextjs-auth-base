@@ -1,7 +1,7 @@
 // https://stripe.com/docs/payments/checkout/one-time#create-one-time-payments
 
 import React from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { Button } from 'antd';
 
 import useErrorIndicator from '@hooks/useErrorIndicator';

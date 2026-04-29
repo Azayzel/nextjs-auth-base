@@ -1,5 +1,5 @@
 import { LessThan } from 'typeorm';
-import { Connection, Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 
 import { Coupon } from '@models/coupon';
 import { COURSE } from '@data/course-keys-types';
@@ -8,9 +8,9 @@ import { BUNDLE } from '@data/bundle-keys-types';
 export class CouponConnector {
   couponRepository: Repository<Coupon>;
 
-  constructor(connection: Connection) {
+  constructor(dataSource: DataSource) {
     this.couponRepository =
-      connection?.getRepository<Coupon>('Coupon');
+      dataSource.getRepository<Coupon>('Coupon');
   }
 
   async createCoupons(
@@ -44,7 +44,7 @@ export class CouponConnector {
     bundleId: BUNDLE
   ) {
     const couponEntity = await this.couponRepository.findOne({
-      coupon,
+      where: { coupon },
     });
 
     if (!couponEntity) {
@@ -82,7 +82,7 @@ export class CouponConnector {
 
   async removeCoupon(coupon: string) {
     const couponEntity = await this.couponRepository.findOne({
-      coupon,
+      where: { coupon },
     });
 
     if (!couponEntity) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useApolloClient } from '@apollo/react-hooks';
+import { useApolloClient } from '@apollo/client';
 import { Icon } from 'antd';
 import FileSaver from 'file-saver';
 import b64toBlob from 'b64-to-blob';

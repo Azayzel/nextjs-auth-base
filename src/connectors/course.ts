@@ -1,4 +1,4 @@
-import { Connection, Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 
 import { COURSE } from '@data/course-keys-types';
 import { BUNDLE } from '@data/bundle-keys-types';
@@ -7,9 +7,9 @@ import { Course } from '@models/course';
 export class CourseConnector {
   courseRepository: Repository<Course>;
 
-  constructor(connection: Connection) {
+  constructor(dataSource: DataSource) {
     this.courseRepository =
-      connection?.getRepository<Course>('Course');
+      dataSource.getRepository<Course>('Course');
   }
 
   async createCourse({

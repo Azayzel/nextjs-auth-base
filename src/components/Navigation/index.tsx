@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Menu, Icon } from 'antd';
 
-import { useApolloClient } from '@apollo/react-hooks';
+import { useApolloClient } from '@apollo/client';
 import * as ROUTES from '@constants/routes';
 import SessionContext from '@context/session';
 import Link from '@components/Link';

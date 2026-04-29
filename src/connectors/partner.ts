@@ -1,5 +1,5 @@
 import { Between } from 'typeorm';
-import { Connection, Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 
 import { VisitorByDay, PartnerPayment } from '@api/resolvers/partner';
 import { PartnerVisitor, PartnerSale } from '@models/partner';
@@ -25,12 +25,12 @@ export class PartnerConnector {
   partnerVisitorRepository: Repository<PartnerVisitor>;
   partnerSaleRepository: Repository<PartnerSale>;
 
-  constructor(connection: Connection) {
+  constructor(dataSource: DataSource) {
     this.partnerVisitorRepository =
-      connection?.getRepository<PartnerVisitor>('PartnerVisitor');
+      dataSource.getRepository<PartnerVisitor>('PartnerVisitor');
 
     this.partnerSaleRepository =
-      connection?.getRepository<PartnerSale>('PartnerSale');
+      dataSource.getRepository<PartnerSale>('PartnerSale');
   }
 
   async createSale(course: Course, partnerId: string) {
@@ -60,7 +60,7 @@ export class PartnerConnector {
     });
 
     const total = await this.partnerSaleRepository.count({
-      partnerId: userId,
+      where: { partnerId: userId },
     });
 
     return { edges, total };
@@ -107,7 +107,7 @@ export class PartnerConnector {
 
   async getVisitorsBetween(from: Date, to: Date) {
     return await this.partnerVisitorRepository.find({
-      createdAt: Between(from, to),
+      where: { createdAt: Between(from, to) },
     });
   }
 

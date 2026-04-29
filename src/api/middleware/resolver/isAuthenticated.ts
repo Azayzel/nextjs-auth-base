@@ -1,5 +1,5 @@
 import { MiddlewareFn } from 'type-graphql';
-import { ForbiddenError } from 'apollo-server';
+import { GraphQLError } from 'graphql';
 
 import type { ResolverContext } from '@typeDefs/resolver';
 
@@ -8,7 +8,9 @@ export const isAuthenticated: MiddlewareFn<ResolverContext> = async (
   next
 ) => {
   if (!context.me) {
-    throw new ForbiddenError('Not authenticated as user.');
+    throw new GraphQLError('Not authenticated as user.', {
+      extensions: { code: 'FORBIDDEN' },
+    });
   }
 
   return next();

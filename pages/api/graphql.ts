@@ -1,8 +1,7 @@
-import { ApolloServer } from 'apollo-server-micro';
+import { ApolloServer } from '@apollo/server';
+import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import { buildSchema } from 'type-graphql';
 import { applyMiddleware } from 'graphql-middleware';
-
-import cors from 'micro-cors';
 
 import 'reflect-metadata';
 
@@ -11,7 +10,7 @@ import { AdminConnector } from '@connectors/admin';
 import { PartnerConnector } from '@connectors/partner';
 import { CourseConnector } from '@connectors/course';
 import { CouponConnector } from '@connectors/coupon';
-import type { ServerRequest, ServerResponse } from '@typeDefs/server';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import type { ResolverContext } from '@typeDefs/resolver';
 
 import resolvers from '@api/resolvers';
@@ -36,17 +35,17 @@ if (process.env.FIREBASE_ADMIN_UID) {
     });
 }
 
-const withCors = cors({
-  origin: '*',
-});
-
 export const config = {
   api: {
     bodyParser: false,
   },
 };
 
-export default async (req: ServerRequest, res: ServerResponse) => {
+let handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void>;
+
+async function getHandler() {
+  if (handler) return handler;
+
   const connection = await getConnection();
 
   const schema = await buildSchema({
@@ -54,14 +53,20 @@ export default async (req: ServerRequest, res: ServerResponse) => {
     dateScalarMode: 'isoDate',
   });
 
-  const server = new ApolloServer({
+  const server = new ApolloServer<ResolverContext>({
     schema: applyMiddleware(schema, sentryMiddleware, meMiddleware),
+  });
 
-    context: async ({ req, res }): Promise<ResolverContext> => {
+  handler = startServerAndCreateNextHandler<
+    NextApiRequest,
+    NextApiResponse,
+    ResolverContext
+  >(server, {
+    context: async (req, res): Promise<ResolverContext> => {
       const adminConnector = new AdminConnector();
-      const partnerConnector = new PartnerConnector(connection!);
-      const courseConnector = new CourseConnector(connection!);
-      const couponConnector = new CouponConnector(connection!);
+      const partnerConnector = new PartnerConnector(connection);
+      const courseConnector = new CourseConnector(connection);
+      const couponConnector = new CouponConnector(connection);
 
       return {
         req,
@@ -74,9 +79,26 @@ export default async (req: ServerRequest, res: ServerResponse) => {
     },
   });
 
-  const handler = withCors(
-    server.createHandler({ path: '/api/graphql' })
-  );
+  return handler;
+}
 
-  return handler(req, res);
-};
+export default async function graphqlHandler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  // CORS headers for GraphQL playground / external clients
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  );
+  if (req.method === 'OPTIONS') {
+    res.end();
+    return;
+  }
+
+  const h = await getHandler();
+  return h(req, res);
+}
+

@@ -1,4 +1,4 @@
-import { AuthenticationError } from 'apollo-server-micro';
+import { GraphQLError } from 'graphql';
 
 import firebaseAdmin from '@services/firebase/admin';
 
@@ -27,7 +27,9 @@ export default async (
       return (await firebaseAdmin.auth().getUser(claims.uid)) as User;
     })
     .catch((error) => {
-      throw new AuthenticationError(error.message);
+      throw new GraphQLError(error.message, {
+        extensions: { code: 'UNAUTHENTICATED' },
+      });
     });
 
   context.me = me;

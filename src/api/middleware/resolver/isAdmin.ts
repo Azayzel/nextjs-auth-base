@@ -1,5 +1,5 @@
 import { MiddlewareFn } from 'type-graphql';
-import { ForbiddenError } from 'apollo-server';
+import { GraphQLError } from 'graphql';
 
 import type { ResolverContext } from '@typeDefs/resolver';
 import { hasAdminRole } from '@validation/admin';
@@ -9,11 +9,15 @@ export const isAdmin: MiddlewareFn<ResolverContext> = async (
   next
 ) => {
   if (!context.me) {
-    throw new ForbiddenError('Not authenticated as user.');
+    throw new GraphQLError('Not authenticated as user.', {
+      extensions: { code: 'FORBIDDEN' },
+    });
   }
 
   if (!hasAdminRole(context.me)) {
-    throw new ForbiddenError('No admin user.');
+    throw new GraphQLError('No admin user.', {
+      extensions: { code: 'FORBIDDEN' },
+    });
   }
 
   return next();

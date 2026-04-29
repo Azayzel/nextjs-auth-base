@@ -7,8 +7,11 @@ generates:
       withHOC: false
       withComponent: false
       withHooks: true
+      importOperationTypesFrom: Types
+      apolloClientVersion: 3
     plugins:
-      - add: /* eslint-disable */
+      - add:
+          content: /* eslint-disable */
       - typescript
       - typescript-operations
       - typescript-react-apollo

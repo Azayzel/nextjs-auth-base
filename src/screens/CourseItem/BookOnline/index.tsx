@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { Skeleton } from 'antd';
 
 import { GET_ONLINE_CHAPTER } from '@queries/book';

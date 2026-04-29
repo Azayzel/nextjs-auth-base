@@ -1,7 +1,7 @@
 /* eslint-disable */
 import gql from 'graphql-tag';
-import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactHooks from '@apollo/react-hooks';
+
+import * as ApolloReactHooks from '@apollo/client';
 export type Maybe<T> = T | null;
 
 /** All built-in and custom scalars, mapped to their actual values */
@@ -846,7 +846,7 @@ export function useGetBookLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHook
         }
 export type GetBookQueryHookResult = ReturnType<typeof useGetBookQuery>;
 export type GetBookLazyQueryHookResult = ReturnType<typeof useGetBookLazyQuery>;
-export type GetBookQueryResult = ApolloReactCommon.QueryResult<GetBookQuery, GetBookQueryVariables>;
+export type GetBookQueryResult = ApolloReactHooks.QueryResult<GetBookQuery, GetBookQueryVariables>;
 export const GetOnlineChapterDocument = gql`
     query GetOnlineChapter($path: String!) {
   onlineChapter(path: $path) {
@@ -879,13 +879,13 @@ export function useGetOnlineChapterLazyQuery(baseOptions?: ApolloReactHooks.Lazy
         }
 export type GetOnlineChapterQueryHookResult = ReturnType<typeof useGetOnlineChapterQuery>;
 export type GetOnlineChapterLazyQueryHookResult = ReturnType<typeof useGetOnlineChapterLazyQuery>;
-export type GetOnlineChapterQueryResult = ApolloReactCommon.QueryResult<GetOnlineChapterQuery, GetOnlineChapterQueryVariables>;
+export type GetOnlineChapterQueryResult = ApolloReactHooks.QueryResult<GetOnlineChapterQuery, GetOnlineChapterQueryVariables>;
 export const CommunityJoinDocument = gql`
     mutation CommunityJoin($email: String!) {
   communityJoin(email: $email)
 }
     `;
-export type CommunityJoinMutationFn = ApolloReactCommon.MutationFunction<CommunityJoinMutation, CommunityJoinMutationVariables>;
+export type CommunityJoinMutationFn = ApolloReactHooks.MutationFunction<CommunityJoinMutation, CommunityJoinMutationVariables>;
 
 /**
  * __useCommunityJoinMutation__
@@ -908,8 +908,8 @@ export function useCommunityJoinMutation(baseOptions?: ApolloReactHooks.Mutation
         return ApolloReactHooks.useMutation<CommunityJoinMutation, CommunityJoinMutationVariables>(CommunityJoinDocument, baseOptions);
       }
 export type CommunityJoinMutationHookResult = ReturnType<typeof useCommunityJoinMutation>;
-export type CommunityJoinMutationResult = ApolloReactCommon.MutationResult<CommunityJoinMutation>;
-export type CommunityJoinMutationOptions = ApolloReactCommon.BaseMutationOptions<CommunityJoinMutation, CommunityJoinMutationVariables>;
+export type CommunityJoinMutationResult = ApolloReactHooks.MutationResult<CommunityJoinMutation>;
+export type CommunityJoinMutationOptions = ApolloReactHooks.BaseMutationOptions<CommunityJoinMutation, CommunityJoinMutationVariables>;
 export const GetDiscountedPriceDocument = gql`
     query GetDiscountedPrice($courseId: String!, $bundleId: String!, $coupon: String!) {
   discountedPrice(courseId: $courseId, bundleId: $bundleId, coupon: $coupon) {
@@ -945,13 +945,13 @@ export function useGetDiscountedPriceLazyQuery(baseOptions?: ApolloReactHooks.La
         }
 export type GetDiscountedPriceQueryHookResult = ReturnType<typeof useGetDiscountedPriceQuery>;
 export type GetDiscountedPriceLazyQueryHookResult = ReturnType<typeof useGetDiscountedPriceLazyQuery>;
-export type GetDiscountedPriceQueryResult = ApolloReactCommon.QueryResult<GetDiscountedPriceQuery, GetDiscountedPriceQueryVariables>;
+export type GetDiscountedPriceQueryResult = ApolloReactHooks.QueryResult<GetDiscountedPriceQuery, GetDiscountedPriceQueryVariables>;
 export const CouponCreateDocument = gql`
     mutation CouponCreate($coupon: String!, $discount: Float!, $count: Float!, $courseId: String!, $bundleId: String!) {
   couponCreate(coupon: $coupon, discount: $discount, count: $count, courseId: $courseId, bundleId: $bundleId)
 }
     `;
-export type CouponCreateMutationFn = ApolloReactCommon.MutationFunction<CouponCreateMutation, CouponCreateMutationVariables>;
+export type CouponCreateMutationFn = ApolloReactHooks.MutationFunction<CouponCreateMutation, CouponCreateMutationVariables>;
 
 /**
  * __useCouponCreateMutation__
@@ -978,8 +978,8 @@ export function useCouponCreateMutation(baseOptions?: ApolloReactHooks.MutationH
         return ApolloReactHooks.useMutation<CouponCreateMutation, CouponCreateMutationVariables>(CouponCreateDocument, baseOptions);
       }
 export type CouponCreateMutationHookResult = ReturnType<typeof useCouponCreateMutation>;
-export type CouponCreateMutationResult = ApolloReactCommon.MutationResult<CouponCreateMutation>;
-export type CouponCreateMutationOptions = ApolloReactCommon.BaseMutationOptions<CouponCreateMutation, CouponCreateMutationVariables>;
+export type CouponCreateMutationResult = ApolloReactHooks.MutationResult<CouponCreateMutation>;
+export type CouponCreateMutationOptions = ApolloReactHooks.BaseMutationOptions<CouponCreateMutation, CouponCreateMutationVariables>;
 export const GetCoursesDocument = gql`
     query GetCourses {
   unlockedCourses {
@@ -1015,7 +1015,7 @@ export function useGetCoursesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryH
         }
 export type GetCoursesQueryHookResult = ReturnType<typeof useGetCoursesQuery>;
 export type GetCoursesLazyQueryHookResult = ReturnType<typeof useGetCoursesLazyQuery>;
-export type GetCoursesQueryResult = ApolloReactCommon.QueryResult<GetCoursesQuery, GetCoursesQueryVariables>;
+export type GetCoursesQueryResult = ApolloReactHooks.QueryResult<GetCoursesQuery, GetCoursesQueryVariables>;
 export const GetCourseDocument = gql`
     query GetCourse($courseId: String!) {
   unlockedCourse(courseId: $courseId) {
@@ -1108,13 +1108,13 @@ export function useGetCourseLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHo
         }
 export type GetCourseQueryHookResult = ReturnType<typeof useGetCourseQuery>;
 export type GetCourseLazyQueryHookResult = ReturnType<typeof useGetCourseLazyQuery>;
-export type GetCourseQueryResult = ApolloReactCommon.QueryResult<GetCourseQuery, GetCourseQueryVariables>;
+export type GetCourseQueryResult = ApolloReactHooks.QueryResult<GetCourseQuery, GetCourseQueryVariables>;
 export const CreateFreeCourseDocument = gql`
     mutation CreateFreeCourse($courseId: String!, $bundleId: String!, $coupon: String!) {
   createFreeCourse(courseId: $courseId, bundleId: $bundleId, coupon: $coupon)
 }
     `;
-export type CreateFreeCourseMutationFn = ApolloReactCommon.MutationFunction<CreateFreeCourseMutation, CreateFreeCourseMutationVariables>;
+export type CreateFreeCourseMutationFn = ApolloReactHooks.MutationFunction<CreateFreeCourseMutation, CreateFreeCourseMutationVariables>;
 
 /**
  * __useCreateFreeCourseMutation__
@@ -1139,14 +1139,14 @@ export function useCreateFreeCourseMutation(baseOptions?: ApolloReactHooks.Mutat
         return ApolloReactHooks.useMutation<CreateFreeCourseMutation, CreateFreeCourseMutationVariables>(CreateFreeCourseDocument, baseOptions);
       }
 export type CreateFreeCourseMutationHookResult = ReturnType<typeof useCreateFreeCourseMutation>;
-export type CreateFreeCourseMutationResult = ApolloReactCommon.MutationResult<CreateFreeCourseMutation>;
-export type CreateFreeCourseMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateFreeCourseMutation, CreateFreeCourseMutationVariables>;
+export type CreateFreeCourseMutationResult = ApolloReactHooks.MutationResult<CreateFreeCourseMutation>;
+export type CreateFreeCourseMutationOptions = ApolloReactHooks.BaseMutationOptions<CreateFreeCourseMutation, CreateFreeCourseMutationVariables>;
 export const CreateAdminCourseDocument = gql`
     mutation CreateAdminCourse($uid: String!, $courseId: String!, $bundleId: String!) {
   createAdminCourse(uid: $uid, courseId: $courseId, bundleId: $bundleId)
 }
     `;
-export type CreateAdminCourseMutationFn = ApolloReactCommon.MutationFunction<CreateAdminCourseMutation, CreateAdminCourseMutationVariables>;
+export type CreateAdminCourseMutationFn = ApolloReactHooks.MutationFunction<CreateAdminCourseMutation, CreateAdminCourseMutationVariables>;
 
 /**
  * __useCreateAdminCourseMutation__
@@ -1171,14 +1171,14 @@ export function useCreateAdminCourseMutation(baseOptions?: ApolloReactHooks.Muta
         return ApolloReactHooks.useMutation<CreateAdminCourseMutation, CreateAdminCourseMutationVariables>(CreateAdminCourseDocument, baseOptions);
       }
 export type CreateAdminCourseMutationHookResult = ReturnType<typeof useCreateAdminCourseMutation>;
-export type CreateAdminCourseMutationResult = ApolloReactCommon.MutationResult<CreateAdminCourseMutation>;
-export type CreateAdminCourseMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateAdminCourseMutation, CreateAdminCourseMutationVariables>;
+export type CreateAdminCourseMutationResult = ApolloReactHooks.MutationResult<CreateAdminCourseMutation>;
+export type CreateAdminCourseMutationOptions = ApolloReactHooks.BaseMutationOptions<CreateAdminCourseMutation, CreateAdminCourseMutationVariables>;
 export const MigrateDocument = gql`
     mutation Migrate($migrationType: String!) {
   migrate(migrationType: $migrationType)
 }
     `;
-export type MigrateMutationFn = ApolloReactCommon.MutationFunction<MigrateMutation, MigrateMutationVariables>;
+export type MigrateMutationFn = ApolloReactHooks.MutationFunction<MigrateMutation, MigrateMutationVariables>;
 
 /**
  * __useMigrateMutation__
@@ -1201,14 +1201,14 @@ export function useMigrateMutation(baseOptions?: ApolloReactHooks.MutationHookOp
         return ApolloReactHooks.useMutation<MigrateMutation, MigrateMutationVariables>(MigrateDocument, baseOptions);
       }
 export type MigrateMutationHookResult = ReturnType<typeof useMigrateMutation>;
-export type MigrateMutationResult = ApolloReactCommon.MutationResult<MigrateMutation>;
-export type MigrateMutationOptions = ApolloReactCommon.BaseMutationOptions<MigrateMutation, MigrateMutationVariables>;
+export type MigrateMutationResult = ApolloReactHooks.MutationResult<MigrateMutation>;
+export type MigrateMutationOptions = ApolloReactHooks.BaseMutationOptions<MigrateMutation, MigrateMutationVariables>;
 export const PromoteToPartnerDocument = gql`
     mutation PromoteToPartner($uid: String!) {
   promoteToPartner(uid: $uid)
 }
     `;
-export type PromoteToPartnerMutationFn = ApolloReactCommon.MutationFunction<PromoteToPartnerMutation, PromoteToPartnerMutationVariables>;
+export type PromoteToPartnerMutationFn = ApolloReactHooks.MutationFunction<PromoteToPartnerMutation, PromoteToPartnerMutationVariables>;
 
 /**
  * __usePromoteToPartnerMutation__
@@ -1231,14 +1231,14 @@ export function usePromoteToPartnerMutation(baseOptions?: ApolloReactHooks.Mutat
         return ApolloReactHooks.useMutation<PromoteToPartnerMutation, PromoteToPartnerMutationVariables>(PromoteToPartnerDocument, baseOptions);
       }
 export type PromoteToPartnerMutationHookResult = ReturnType<typeof usePromoteToPartnerMutation>;
-export type PromoteToPartnerMutationResult = ApolloReactCommon.MutationResult<PromoteToPartnerMutation>;
-export type PromoteToPartnerMutationOptions = ApolloReactCommon.BaseMutationOptions<PromoteToPartnerMutation, PromoteToPartnerMutationVariables>;
+export type PromoteToPartnerMutationResult = ApolloReactHooks.MutationResult<PromoteToPartnerMutation>;
+export type PromoteToPartnerMutationOptions = ApolloReactHooks.BaseMutationOptions<PromoteToPartnerMutation, PromoteToPartnerMutationVariables>;
 export const PartnerTrackVisitorDocument = gql`
     mutation PartnerTrackVisitor($partnerId: String!) {
   partnerTrackVisitor(partnerId: $partnerId)
 }
     `;
-export type PartnerTrackVisitorMutationFn = ApolloReactCommon.MutationFunction<PartnerTrackVisitorMutation, PartnerTrackVisitorMutationVariables>;
+export type PartnerTrackVisitorMutationFn = ApolloReactHooks.MutationFunction<PartnerTrackVisitorMutation, PartnerTrackVisitorMutationVariables>;
 
 /**
  * __usePartnerTrackVisitorMutation__
@@ -1261,8 +1261,8 @@ export function usePartnerTrackVisitorMutation(baseOptions?: ApolloReactHooks.Mu
         return ApolloReactHooks.useMutation<PartnerTrackVisitorMutation, PartnerTrackVisitorMutationVariables>(PartnerTrackVisitorDocument, baseOptions);
       }
 export type PartnerTrackVisitorMutationHookResult = ReturnType<typeof usePartnerTrackVisitorMutation>;
-export type PartnerTrackVisitorMutationResult = ApolloReactCommon.MutationResult<PartnerTrackVisitorMutation>;
-export type PartnerTrackVisitorMutationOptions = ApolloReactCommon.BaseMutationOptions<PartnerTrackVisitorMutation, PartnerTrackVisitorMutationVariables>;
+export type PartnerTrackVisitorMutationResult = ApolloReactHooks.MutationResult<PartnerTrackVisitorMutation>;
+export type PartnerTrackVisitorMutationOptions = ApolloReactHooks.BaseMutationOptions<PartnerTrackVisitorMutation, PartnerTrackVisitorMutationVariables>;
 export const PartnerVisitorsDocument = gql`
     query PartnerVisitors($from: DateTime!, $to: DateTime!) {
   partnerVisitors(from: $from, to: $to) {
@@ -1297,7 +1297,7 @@ export function usePartnerVisitorsLazyQuery(baseOptions?: ApolloReactHooks.LazyQ
         }
 export type PartnerVisitorsQueryHookResult = ReturnType<typeof usePartnerVisitorsQuery>;
 export type PartnerVisitorsLazyQueryHookResult = ReturnType<typeof usePartnerVisitorsLazyQuery>;
-export type PartnerVisitorsQueryResult = ApolloReactCommon.QueryResult<PartnerVisitorsQuery, PartnerVisitorsQueryVariables>;
+export type PartnerVisitorsQueryResult = ApolloReactHooks.QueryResult<PartnerVisitorsQuery, PartnerVisitorsQueryVariables>;
 export const PartnerSalesDocument = gql`
     query PartnerSales($offset: Float!, $limit: Float!) {
   partnerSales(offset: $offset, limit: $limit) {
@@ -1342,7 +1342,7 @@ export function usePartnerSalesLazyQuery(baseOptions?: ApolloReactHooks.LazyQuer
         }
 export type PartnerSalesQueryHookResult = ReturnType<typeof usePartnerSalesQuery>;
 export type PartnerSalesLazyQueryHookResult = ReturnType<typeof usePartnerSalesLazyQuery>;
-export type PartnerSalesQueryResult = ApolloReactCommon.QueryResult<PartnerSalesQuery, PartnerSalesQueryVariables>;
+export type PartnerSalesQueryResult = ApolloReactHooks.QueryResult<PartnerSalesQuery, PartnerSalesQueryVariables>;
 export const PartnerPaymentsDocument = gql`
     query PartnerPayments {
   partnerPayments {
@@ -1375,7 +1375,7 @@ export function usePartnerPaymentsLazyQuery(baseOptions?: ApolloReactHooks.LazyQ
         }
 export type PartnerPaymentsQueryHookResult = ReturnType<typeof usePartnerPaymentsQuery>;
 export type PartnerPaymentsLazyQueryHookResult = ReturnType<typeof usePartnerPaymentsLazyQuery>;
-export type PartnerPaymentsQueryResult = ApolloReactCommon.QueryResult<PartnerPaymentsQuery, PartnerPaymentsQueryVariables>;
+export type PartnerPaymentsQueryResult = ApolloReactHooks.QueryResult<PartnerPaymentsQuery, PartnerPaymentsQueryVariables>;
 export const PaypalCreateOrderDocument = gql`
     mutation PaypalCreateOrder($courseId: String!, $bundleId: String!, $coupon: String, $partnerId: String) {
   paypalCreateOrder(courseId: $courseId, bundleId: $bundleId, coupon: $coupon, partnerId: $partnerId) {
@@ -1383,7 +1383,7 @@ export const PaypalCreateOrderDocument = gql`
   }
 }
     `;
-export type PaypalCreateOrderMutationFn = ApolloReactCommon.MutationFunction<PaypalCreateOrderMutation, PaypalCreateOrderMutationVariables>;
+export type PaypalCreateOrderMutationFn = ApolloReactHooks.MutationFunction<PaypalCreateOrderMutation, PaypalCreateOrderMutationVariables>;
 
 /**
  * __usePaypalCreateOrderMutation__
@@ -1409,14 +1409,14 @@ export function usePaypalCreateOrderMutation(baseOptions?: ApolloReactHooks.Muta
         return ApolloReactHooks.useMutation<PaypalCreateOrderMutation, PaypalCreateOrderMutationVariables>(PaypalCreateOrderDocument, baseOptions);
       }
 export type PaypalCreateOrderMutationHookResult = ReturnType<typeof usePaypalCreateOrderMutation>;
-export type PaypalCreateOrderMutationResult = ApolloReactCommon.MutationResult<PaypalCreateOrderMutation>;
-export type PaypalCreateOrderMutationOptions = ApolloReactCommon.BaseMutationOptions<PaypalCreateOrderMutation, PaypalCreateOrderMutationVariables>;
+export type PaypalCreateOrderMutationResult = ApolloReactHooks.MutationResult<PaypalCreateOrderMutation>;
+export type PaypalCreateOrderMutationOptions = ApolloReactHooks.BaseMutationOptions<PaypalCreateOrderMutation, PaypalCreateOrderMutationVariables>;
 export const PaypalApproveOrderDocument = gql`
     mutation PaypalApproveOrder($orderId: String!) {
   paypalApproveOrder(orderId: $orderId)
 }
     `;
-export type PaypalApproveOrderMutationFn = ApolloReactCommon.MutationFunction<PaypalApproveOrderMutation, PaypalApproveOrderMutationVariables>;
+export type PaypalApproveOrderMutationFn = ApolloReactHooks.MutationFunction<PaypalApproveOrderMutation, PaypalApproveOrderMutationVariables>;
 
 /**
  * __usePaypalApproveOrderMutation__
@@ -1439,8 +1439,8 @@ export function usePaypalApproveOrderMutation(baseOptions?: ApolloReactHooks.Mut
         return ApolloReactHooks.useMutation<PaypalApproveOrderMutation, PaypalApproveOrderMutationVariables>(PaypalApproveOrderDocument, baseOptions);
       }
 export type PaypalApproveOrderMutationHookResult = ReturnType<typeof usePaypalApproveOrderMutation>;
-export type PaypalApproveOrderMutationResult = ApolloReactCommon.MutationResult<PaypalApproveOrderMutation>;
-export type PaypalApproveOrderMutationOptions = ApolloReactCommon.BaseMutationOptions<PaypalApproveOrderMutation, PaypalApproveOrderMutationVariables>;
+export type PaypalApproveOrderMutationResult = ApolloReactHooks.MutationResult<PaypalApproveOrderMutation>;
+export type PaypalApproveOrderMutationOptions = ApolloReactHooks.BaseMutationOptions<PaypalApproveOrderMutation, PaypalApproveOrderMutationVariables>;
 export const SignUpDocument = gql`
     mutation SignUp($username: String!, $email: String!, $password: String!) {
   signUp(username: $username, email: $email, password: $password) {
@@ -1448,7 +1448,7 @@ export const SignUpDocument = gql`
   }
 }
     `;
-export type SignUpMutationFn = ApolloReactCommon.MutationFunction<SignUpMutation, SignUpMutationVariables>;
+export type SignUpMutationFn = ApolloReactHooks.MutationFunction<SignUpMutation, SignUpMutationVariables>;
 
 /**
  * __useSignUpMutation__
@@ -1473,8 +1473,8 @@ export function useSignUpMutation(baseOptions?: ApolloReactHooks.MutationHookOpt
         return ApolloReactHooks.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument, baseOptions);
       }
 export type SignUpMutationHookResult = ReturnType<typeof useSignUpMutation>;
-export type SignUpMutationResult = ApolloReactCommon.MutationResult<SignUpMutation>;
-export type SignUpMutationOptions = ApolloReactCommon.BaseMutationOptions<SignUpMutation, SignUpMutationVariables>;
+export type SignUpMutationResult = ApolloReactHooks.MutationResult<SignUpMutation>;
+export type SignUpMutationOptions = ApolloReactHooks.BaseMutationOptions<SignUpMutation, SignUpMutationVariables>;
 export const SignInDocument = gql`
     mutation SignIn($email: String!, $password: String!) {
   signIn(email: $email, password: $password) {
@@ -1482,7 +1482,7 @@ export const SignInDocument = gql`
   }
 }
     `;
-export type SignInMutationFn = ApolloReactCommon.MutationFunction<SignInMutation, SignInMutationVariables>;
+export type SignInMutationFn = ApolloReactHooks.MutationFunction<SignInMutation, SignInMutationVariables>;
 
 /**
  * __useSignInMutation__
@@ -1506,14 +1506,14 @@ export function useSignInMutation(baseOptions?: ApolloReactHooks.MutationHookOpt
         return ApolloReactHooks.useMutation<SignInMutation, SignInMutationVariables>(SignInDocument, baseOptions);
       }
 export type SignInMutationHookResult = ReturnType<typeof useSignInMutation>;
-export type SignInMutationResult = ApolloReactCommon.MutationResult<SignInMutation>;
-export type SignInMutationOptions = ApolloReactCommon.BaseMutationOptions<SignInMutation, SignInMutationVariables>;
+export type SignInMutationResult = ApolloReactHooks.MutationResult<SignInMutation>;
+export type SignInMutationOptions = ApolloReactHooks.BaseMutationOptions<SignInMutation, SignInMutationVariables>;
 export const PasswordChangeDocument = gql`
     mutation PasswordChange($password: String!) {
   passwordChange(password: $password)
 }
     `;
-export type PasswordChangeMutationFn = ApolloReactCommon.MutationFunction<PasswordChangeMutation, PasswordChangeMutationVariables>;
+export type PasswordChangeMutationFn = ApolloReactHooks.MutationFunction<PasswordChangeMutation, PasswordChangeMutationVariables>;
 
 /**
  * __usePasswordChangeMutation__
@@ -1536,14 +1536,14 @@ export function usePasswordChangeMutation(baseOptions?: ApolloReactHooks.Mutatio
         return ApolloReactHooks.useMutation<PasswordChangeMutation, PasswordChangeMutationVariables>(PasswordChangeDocument, baseOptions);
       }
 export type PasswordChangeMutationHookResult = ReturnType<typeof usePasswordChangeMutation>;
-export type PasswordChangeMutationResult = ApolloReactCommon.MutationResult<PasswordChangeMutation>;
-export type PasswordChangeMutationOptions = ApolloReactCommon.BaseMutationOptions<PasswordChangeMutation, PasswordChangeMutationVariables>;
+export type PasswordChangeMutationResult = ApolloReactHooks.MutationResult<PasswordChangeMutation>;
+export type PasswordChangeMutationOptions = ApolloReactHooks.BaseMutationOptions<PasswordChangeMutation, PasswordChangeMutationVariables>;
 export const PasswordForgotDocument = gql`
     mutation PasswordForgot($email: String!) {
   passwordForgot(email: $email)
 }
     `;
-export type PasswordForgotMutationFn = ApolloReactCommon.MutationFunction<PasswordForgotMutation, PasswordForgotMutationVariables>;
+export type PasswordForgotMutationFn = ApolloReactHooks.MutationFunction<PasswordForgotMutation, PasswordForgotMutationVariables>;
 
 /**
  * __usePasswordForgotMutation__
@@ -1566,14 +1566,14 @@ export function usePasswordForgotMutation(baseOptions?: ApolloReactHooks.Mutatio
         return ApolloReactHooks.useMutation<PasswordForgotMutation, PasswordForgotMutationVariables>(PasswordForgotDocument, baseOptions);
       }
 export type PasswordForgotMutationHookResult = ReturnType<typeof usePasswordForgotMutation>;
-export type PasswordForgotMutationResult = ApolloReactCommon.MutationResult<PasswordForgotMutation>;
-export type PasswordForgotMutationOptions = ApolloReactCommon.BaseMutationOptions<PasswordForgotMutation, PasswordForgotMutationVariables>;
+export type PasswordForgotMutationResult = ApolloReactHooks.MutationResult<PasswordForgotMutation>;
+export type PasswordForgotMutationOptions = ApolloReactHooks.BaseMutationOptions<PasswordForgotMutation, PasswordForgotMutationVariables>;
 export const EmailChangeDocument = gql`
     mutation EmailChange($email: String!) {
   emailChange(email: $email)
 }
     `;
-export type EmailChangeMutationFn = ApolloReactCommon.MutationFunction<EmailChangeMutation, EmailChangeMutationVariables>;
+export type EmailChangeMutationFn = ApolloReactHooks.MutationFunction<EmailChangeMutation, EmailChangeMutationVariables>;
 
 /**
  * __useEmailChangeMutation__
@@ -1596,8 +1596,8 @@ export function useEmailChangeMutation(baseOptions?: ApolloReactHooks.MutationHo
         return ApolloReactHooks.useMutation<EmailChangeMutation, EmailChangeMutationVariables>(EmailChangeDocument, baseOptions);
       }
 export type EmailChangeMutationHookResult = ReturnType<typeof useEmailChangeMutation>;
-export type EmailChangeMutationResult = ApolloReactCommon.MutationResult<EmailChangeMutation>;
-export type EmailChangeMutationOptions = ApolloReactCommon.BaseMutationOptions<EmailChangeMutation, EmailChangeMutationVariables>;
+export type EmailChangeMutationResult = ApolloReactHooks.MutationResult<EmailChangeMutation>;
+export type EmailChangeMutationOptions = ApolloReactHooks.BaseMutationOptions<EmailChangeMutation, EmailChangeMutationVariables>;
 export const GetStorefrontCourseDocument = gql`
     query GetStorefrontCourse($courseId: String!, $bundleId: String!) {
   storefrontCourse(courseId: $courseId, bundleId: $bundleId) {
@@ -1638,7 +1638,7 @@ export function useGetStorefrontCourseLazyQuery(baseOptions?: ApolloReactHooks.L
         }
 export type GetStorefrontCourseQueryHookResult = ReturnType<typeof useGetStorefrontCourseQuery>;
 export type GetStorefrontCourseLazyQueryHookResult = ReturnType<typeof useGetStorefrontCourseLazyQuery>;
-export type GetStorefrontCourseQueryResult = ApolloReactCommon.QueryResult<GetStorefrontCourseQuery, GetStorefrontCourseQueryVariables>;
+export type GetStorefrontCourseQueryResult = ApolloReactHooks.QueryResult<GetStorefrontCourseQuery, GetStorefrontCourseQueryVariables>;
 export const GetStorefrontCoursesDocument = gql`
     query GetStorefrontCourses {
   storefrontCourses {
@@ -1673,7 +1673,7 @@ export function useGetStorefrontCoursesLazyQuery(baseOptions?: ApolloReactHooks.
         }
 export type GetStorefrontCoursesQueryHookResult = ReturnType<typeof useGetStorefrontCoursesQuery>;
 export type GetStorefrontCoursesLazyQueryHookResult = ReturnType<typeof useGetStorefrontCoursesLazyQuery>;
-export type GetStorefrontCoursesQueryResult = ApolloReactCommon.QueryResult<GetStorefrontCoursesQuery, GetStorefrontCoursesQueryVariables>;
+export type GetStorefrontCoursesQueryResult = ApolloReactHooks.QueryResult<GetStorefrontCoursesQuery, GetStorefrontCoursesQueryVariables>;
 export const StripeCreateOrderDocument = gql`
     mutation StripeCreateOrder($imageUrl: String!, $courseId: String!, $bundleId: String!, $coupon: String, $partnerId: String) {
   stripeCreateOrder(imageUrl: $imageUrl, courseId: $courseId, bundleId: $bundleId, coupon: $coupon, partnerId: $partnerId) {
@@ -1681,7 +1681,7 @@ export const StripeCreateOrderDocument = gql`
   }
 }
     `;
-export type StripeCreateOrderMutationFn = ApolloReactCommon.MutationFunction<StripeCreateOrderMutation, StripeCreateOrderMutationVariables>;
+export type StripeCreateOrderMutationFn = ApolloReactHooks.MutationFunction<StripeCreateOrderMutation, StripeCreateOrderMutationVariables>;
 
 /**
  * __useStripeCreateOrderMutation__
@@ -1708,8 +1708,8 @@ export function useStripeCreateOrderMutation(baseOptions?: ApolloReactHooks.Muta
         return ApolloReactHooks.useMutation<StripeCreateOrderMutation, StripeCreateOrderMutationVariables>(StripeCreateOrderDocument, baseOptions);
       }
 export type StripeCreateOrderMutationHookResult = ReturnType<typeof useStripeCreateOrderMutation>;
-export type StripeCreateOrderMutationResult = ApolloReactCommon.MutationResult<StripeCreateOrderMutation>;
-export type StripeCreateOrderMutationOptions = ApolloReactCommon.BaseMutationOptions<StripeCreateOrderMutation, StripeCreateOrderMutationVariables>;
+export type StripeCreateOrderMutationResult = ApolloReactHooks.MutationResult<StripeCreateOrderMutation>;
+export type StripeCreateOrderMutationOptions = ApolloReactHooks.BaseMutationOptions<StripeCreateOrderMutation, StripeCreateOrderMutationVariables>;
 export const GetUpgradeableCoursesDocument = gql`
     query GetUpgradeableCourses($courseId: String!) {
   upgradeableCourses(courseId: $courseId) {
@@ -1750,7 +1750,7 @@ export function useGetUpgradeableCoursesLazyQuery(baseOptions?: ApolloReactHooks
         }
 export type GetUpgradeableCoursesQueryHookResult = ReturnType<typeof useGetUpgradeableCoursesQuery>;
 export type GetUpgradeableCoursesLazyQueryHookResult = ReturnType<typeof useGetUpgradeableCoursesLazyQuery>;
-export type GetUpgradeableCoursesQueryResult = ApolloReactCommon.QueryResult<GetUpgradeableCoursesQuery, GetUpgradeableCoursesQueryVariables>;
+export type GetUpgradeableCoursesQueryResult = ApolloReactHooks.QueryResult<GetUpgradeableCoursesQuery, GetUpgradeableCoursesQueryVariables>;
 export const GetMeDocument = gql`
     query GetMe {
   me {
@@ -1785,4 +1785,4 @@ export function useGetMeLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOp
         }
 export type GetMeQueryHookResult = ReturnType<typeof useGetMeQuery>;
 export type GetMeLazyQueryHookResult = ReturnType<typeof useGetMeLazyQuery>;
-export type GetMeQueryResult = ApolloReactCommon.QueryResult<GetMeQuery, GetMeQueryVariables>;
+export type GetMeQueryResult = ApolloReactHooks.QueryResult<GetMeQuery, GetMeQueryVariables>;

@@ -20,7 +20,7 @@ module.exports = {
     '^@typeDefs(.*)$': '<rootDir>/src/types$1',
     '^@generated(.*)$': '<rootDir>/src/generated$1',
   },
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jest-environment-jsdom',
   transform: {
     '^.+\\.(ts|tsx)$': 'babel-jest',
   },
